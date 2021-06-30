@@ -41,208 +41,51 @@
 
     <div class="albuns">
       <div class="albuns-div">
-        <div>
-          <v-card :loading="loading" class="mx-auto my-12" max-width="374">
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <v-img
-              height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-
-            <v-card-title>Cafe Badilico</v-card-title>
-
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <v-rating
-                  :value="4.5"
-                  color="amber"
-                  dense
-                  half-increments
-                  readonly
-                  size="14"
-                ></v-rating>
-
-                <div class="grey--text ms-4">4.5 (413)</div>
-              </v-row>
-
-              <div class="my-4 text-subtitle-1">$ • Italian, Cafe</div>
-
-              <div>
-                Small plates, salads & sandwiches - an intimate setting with 12
-                indoor seats plus patio seating.
-              </div>
-            </v-card-text>
-
-            <v-divider class="mx-4"></v-divider>
-
-            <v-card-title>Tonight's availability</v-card-title>
-
-            <v-card-text>
-              <!-- <v-chip-group
-              v-model="selection"
-              active-class="deep-purple accent-4 white--text"
-              column
-            >
-              <v-chip>5:30PM</v-chip>
-
-              <v-chip>7:30PM</v-chip>
-
-              <v-chip>8:00PM</v-chip>
-
-              <v-chip>9:00PM</v-chip>
-            </v-chip-group> -->
-            </v-card-text>
-
-            <v-card-actions> </v-card-actions>
-          </v-card>
-        </div>
-
-        <div>
-          <v-card :loading="loading" class="mx-auto my-12" max-width="374">
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <v-img
-              height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-
-            <v-card-title>Cafe Badilico</v-card-title>
-
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <v-rating
-                  :value="4.5"
-                  color="amber"
-                  dense
-                  half-increments
-                  readonly
-                  size="14"
-                ></v-rating>
-
-                <div class="grey--text ms-4">4.5 (413)</div>
-              </v-row>
-
-              <div class="my-4 text-subtitle-1">$ • Italian, Cafe</div>
-
-              <div>
-                Small plates, salads & sandwiches - an intimate setting with 12
-                indoor seats plus patio seating.
-              </div>
-            </v-card-text>
-
-            <v-divider class="mx-4"></v-divider>
-
-            <v-card-title>Tonight's availability</v-card-title>
-
-            <v-card-text>
-              <!-- <v-chip-group
-              v-model="selection"
-              active-class="deep-purple accent-4 white--text"
-              column
-            >
-              <v-chip>5:30PM</v-chip>
-
-              <v-chip>7:30PM</v-chip>
-
-              <v-chip>8:00PM</v-chip>
-
-              <v-chip>9:00PM</v-chip>
-            </v-chip-group> -->
-            </v-card-text>
-
-            <v-card-actions> </v-card-actions>
-          </v-card>
-        </div>
-
-        <div>
-          <v-card :loading="loading" class="mx-auto my-12" max-width="374">
-            <template slot="progress">
-              <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-              ></v-progress-linear>
-            </template>
-
-            <v-img
-              height="250"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-
-            <v-card-title>Cafe Badilico</v-card-title>
-
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <v-rating
-                  :value="4.5"
-                  color="amber"
-                  dense
-                  half-increments
-                  readonly
-                  size="14"
-                ></v-rating>
-
-                <div class="grey--text ms-4">4.5 (413)</div>
-              </v-row>
-
-              <div class="my-4 text-subtitle-1">$ • Italian, Cafe</div>
-
-              <div>
-                Small plates, salads & sandwiches - an intimate setting with 12
-                indoor seats plus patio seating.
-              </div>
-            </v-card-text>
-
-            <v-divider class="mx-4"></v-divider>
-
-            <v-card-title>Tonight's availability</v-card-title>
-
-            <v-card-text>
-              <!-- <v-chip-group
-              v-model="selection"
-              active-class="deep-purple accent-4 white--text"
-              column
-            >
-              <v-chip>5:30PM</v-chip>
-
-              <v-chip>7:30PM</v-chip>
-
-              <v-chip>8:00PM</v-chip>
-
-              <v-chip>9:00PM</v-chip>
-            </v-chip-group> -->
-            </v-card-text>
-
-            <v-card-actions> </v-card-actions>
-          </v-card>
+        <div v-for="album_info of albuns_info" :key="album_info.title">
+          <album-card :data="album_info" />
         </div>
       </div>
     </div>
 
-    <div class="header"> 
+    <div class="header">
       <p>Copyright © 2014 - 2021 ·Liam Cabral· Todos os Direitos Reservados</p>
     </div>
   </v-container>
 </template>
 
 <script>
+import AlbumCard from "../components/AlbumCard.vue";
+import img_links from "../utils/img-links";
+
 export default {
   name: "Home",
 
+  components: {
+    AlbumCard,
+  },
+
   data: () => ({
+    albuns_info: [
+      {
+        img: img_links.the_leader,
+        title: "The Leader",
+        about:
+          "Follow the Leader é o terceiro álbum de estúdio da banda estaduniense de Nu Metal Korn. O álbum foi lançado em 18 de agosto de 1998, pelo selo Immortal/Epic. Este foi o primeiro álbum da banda a não ser produzido por Ross Robinson, mas por Steve Thompson e Toby Wright. O álbum chegou à primeira colocação em quatro paradas, incluindo a Billboard 200 com 268 mil unidades vendidas apenas na primeira semana após o lançamento. Follow The Leader é considerado pelos membros do Korn como o álbum de maior sucesso comercial, sendo certificado cinco vezes como platina pela RIAA. Seus singles 'Got The Life' e 'Freak on a Leash' estrelaram em mais de três paradas, e seus clipes são considerados os primeiros a serem 'aposentados' da MTV, mais notavelmente no programa Total Request Live da mesma emissora.",
+      },
+      {
+        img: img_links.issues,
+        title: "Issues",
+        about:
+          "Issues é o quarto álbum de estúdio da banda de nu metal Korn, lançado a 16 de Novembro de 1999. O álbum chegou imediatamente ao primeiro lugar no topo de vendas. Desde seu lançamento, o álbum já vendeu mais de 13 milhões de cópias em todo o mundo. Falling Away From Me foi nomeado para os VMA de 2000 na categoria de Melhor Videoclipe de Rock. O Korn foi considerado o 53º Melhor artista de Hard Rock de sempre, pela VH1. Issues foi um sucesso comercial, estreando em primeiro lugar na Billboard 200 , com 575,000 unidades vendidas em sua primeira semana de lançamento. Em 22 de dezembro de 1999 Issues foi certificado 3x platina em os EUA Com 3.450.000 de cópias vendidas. Em 2020, a revista Metal Hammer o elegeu como um dos 20 melhores álbuns de metal de 1999.",
+      },
+      {
+        img: img_links.the_nothing,
+        title: "The Nothing",
+        about:
+          "The Nothing é o décimo terceiro álbum de estúdio da banda de nu metal Korn, lançado em 13 de setembro de 2019. Foi produzido por Nick Raskulinecz. O portal Loudwire o elegeu como um dos 50 melhores discos de metal de 2019.",
+      },
+    ],
+
     model: 0,
     items: [
       {
@@ -306,14 +149,30 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 20px;
+    // margin: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+
+    p {
+      font-size: 17px;
+      color: black;
+    }
   }
 }
 
 .header {
+  display: flex;
+  justify-content: center;
   background-color: #1a1919;
   width: auto;
   color: white;
+  align-items: center;
   text-align: center;
+  height: 70px;
+
+  p {
+    font-size: 20px;
+  }
 }
 </style>
