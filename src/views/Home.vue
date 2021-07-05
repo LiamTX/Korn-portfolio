@@ -4,10 +4,10 @@
       <v-toolbar class="toolbar" color="grey darken-4">
         <v-toolbar-title class="toolbar-title">KORN</v-toolbar-title>
         <v-toolbar-item class="toolbar-item"
-          ><a href="">Nossa jornada</a></v-toolbar-item
+          ><a href="#about">Nossa jornada</a></v-toolbar-item
         >
         <v-toolbar-item class="toolbar-item"
-          ><a href="">Albuns</a></v-toolbar-item
+          ><a href="#albuns">Albuns</a></v-toolbar-item
         >
       </v-toolbar>
     </div>
@@ -24,7 +24,7 @@
       </v-carousel>
     </div>
 
-    <div class="about">
+    <div class="about" id="about">
       <div>
         <p>
           Formado em 1990, em Bakersfield, Korn vendeu 40 milhões de discos
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="albuns">
+    <div class="albuns" id="albuns">
       <div class="albuns-div">
         <div v-for="album_info of albuns_info" :key="album_info.title">
           <album-card :data="album_info" />
